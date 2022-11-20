@@ -1,6 +1,14 @@
 // import {StatusBar} from "expo-status-bar";
 import {useState} from "react";
-import {StyleSheet, Text, View, Button, TextInput} from "react-native";
+import {
+    StyleSheet,
+    Text,
+    View,
+    Button,
+    TextInput,
+    ScrollView,
+    FlatList,
+} from "react-native";
 
 export default function App() {
     const [enteredGoalText, setEnteredGoalText] = useState("");
@@ -29,13 +37,18 @@ export default function App() {
 
             {/* List of todos */}
             <View style={styles.goalsContainer}>
-                {goalList.map((goal, id) => (
-                    <View key={id} style={styles.goalItem}>
-                        <Text key={id} style={styles.goalText}>
-                            {goal}
-                        </Text>
-                    </View>
-                ))}
+                <FlatList
+                    data={goalList}
+                    renderItem={(goalData) => {
+                        return (
+                            <View key={goalData.index} style={styles.goalItem}>
+                                <Text style={styles.goalText}>
+                                    {goalData.item}
+                                </Text>
+                            </View>
+                        );
+                    }}
+                />
             </View>
         </View>
     );
@@ -44,9 +57,6 @@ export default function App() {
 const styles = StyleSheet.create({
     appContainer: {
         flex: 1,
-        // backgroundColor: "azure",
-        // alignItems: "center",
-        // justifyContent: "center",
         padding: 50,
         paddingHorizontal: 16,
     },
