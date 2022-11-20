@@ -9,7 +9,17 @@ export default function App() {
 
     function addGoalHandler(enteredGoalText) {
         console.log("pressed", enteredGoalText);
-        setGoalList((currentGoals) => [...currentGoals, enteredGoalText]);
+        setGoalList((currentGoals) => [
+            ...currentGoals,
+            {text: enteredGoalText, id: Math.random().toString()},
+        ]);
+    }
+
+    function deleteGoalHandler(id) {
+        console.log("delete...", id);
+        setGoalList((currentGoals) => {
+            return currentGoals.filter((goal) => goal.id !== id);
+        });
     }
 
     return (
@@ -24,10 +34,14 @@ export default function App() {
                     renderItem={(itemData) => {
                         return (
                             <GoalItem
-                                key={itemData.index}
-                                text={itemData.item}
+                                id={itemData.item.id}
+                                text={itemData.item.text}
+                                onDeleteItem={deleteGoalHandler}
                             />
                         );
+                    }}
+                    keyExtractor={(item, index) => {
+                        return item.id;
                     }}
                 />
             </View>
