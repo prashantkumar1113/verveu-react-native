@@ -1,11 +1,16 @@
 // import {StatusBar} from "expo-status-bar";
 import {useState} from "react";
-import {StyleSheet, View, FlatList} from "react-native";
+import {StyleSheet, View, FlatList, Button} from "react-native";
 import GoalInput from "./components/GoalInput";
 import GoalItem from "./components/GoalItem";
 
 export default function App() {
+    const [modalVisibility, setModalVisibility] = useState(false);
     const [goalList, setGoalList] = useState([]);
+
+    function startGoalModalHandler() {
+        setModalVisibility(true);
+    }
 
     function addGoalHandler(enteredGoalText) {
         console.log("pressed", enteredGoalText);
@@ -25,7 +30,17 @@ export default function App() {
     return (
         <View style={styles.appContainer}>
             {/* Adding a todo */}
-            <GoalInput onAddGoal={addGoalHandler} />
+            <Button
+                title="Add new Goal"
+                color="dodgerblue"
+                onPress={startGoalModalHandler}
+            />
+
+            <GoalInput
+                onAddGoal={addGoalHandler}
+                modalVisible={modalVisibility}
+                setModalVisibility={setModalVisibility}
+            />
 
             {/* List of todos */}
             <View style={styles.goalsContainer}>
