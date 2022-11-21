@@ -1,6 +1,6 @@
-// import {StatusBar} from "expo-status-bar";
 import {useState} from "react";
 import {StyleSheet, View, FlatList, Button} from "react-native";
+import {StatusBar} from "expo-status-bar";
 import GoalInput from "./components/GoalInput";
 import GoalItem from "./components/GoalItem";
 
@@ -28,39 +28,42 @@ export default function App() {
     }
 
     return (
-        <View style={styles.appContainer}>
-            {/* Adding a todo */}
-            <Button
-                title="Add new Goal"
-                color="dodgerblue"
-                onPress={startGoalModalHandler}
-            />
-
-            <GoalInput
-                onAddGoal={addGoalHandler}
-                modalVisible={modalVisibility}
-                setModalVisibility={setModalVisibility}
-            />
-
-            {/* List of todos */}
-            <View style={styles.goalsContainer}>
-                <FlatList
-                    data={goalList}
-                    renderItem={(itemData) => {
-                        return (
-                            <GoalItem
-                                id={itemData.item.id}
-                                text={itemData.item.text}
-                                onDeleteItem={deleteGoalHandler}
-                            />
-                        );
-                    }}
-                    keyExtractor={(item, index) => {
-                        return item.id;
-                    }}
+        <>
+            <StatusBar style="light" />
+            <View style={styles.appContainer}>
+                {/* Adding a todo */}
+                <Button
+                    title="Add new Goal"
+                    color="dodgerblue"
+                    onPress={startGoalModalHandler}
                 />
+
+                <GoalInput
+                    onAddGoal={addGoalHandler}
+                    modalVisible={modalVisibility}
+                    setModalVisibility={setModalVisibility}
+                />
+
+                {/* List of todos */}
+                <View style={styles.goalsContainer}>
+                    <FlatList
+                        data={goalList}
+                        renderItem={(itemData) => {
+                            return (
+                                <GoalItem
+                                    id={itemData.item.id}
+                                    text={itemData.item.text}
+                                    onDeleteItem={deleteGoalHandler}
+                                />
+                            );
+                        }}
+                        keyExtractor={(item, index) => {
+                            return item.id;
+                        }}
+                    />
+                </View>
             </View>
-        </View>
+        </>
     );
 }
 
@@ -69,6 +72,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 50,
         paddingHorizontal: 16,
+        marginTop: 16,
     },
 
     goalsContainer: {

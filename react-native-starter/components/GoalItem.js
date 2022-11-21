@@ -19,6 +19,15 @@ const styles = StyleSheet.create({
         margin: 8,
         borderRadius: 6,
         backgroundColor: "dodgerblue",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5,
     },
     goalText: {
         padding: 8,
